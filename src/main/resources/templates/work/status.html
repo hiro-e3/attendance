@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>勤怠管理</title>
+</head>
+<body>
+<h1>勤怠管理</h1>
+<p>こんにちは、<span th:text="${user.name}">ユーザー</span>さん</p>
+
+<div th:if="${record == null}">
+    <form method="post" th:action="@{/work/clock-in}">
+        <button type="submit">出勤</button>
+    </form>
+</div>
+<div th:if="${record != null}">
+    <p>出勤時刻: <span th:text="${record.clockIn}">---</span></p>
+    <p th:if="${record.clockOut != null}">
+        退勤時刻: <span th:text="${record.clockOut}">---</span>
+    </p>
+    <form method="post" th:action="@{/work/clock-out}" th:if="${record.clockOut == null}">
+        <button type="submit">退勤</button>
+    </form>
+</div>
+
+</body>
+</html>
